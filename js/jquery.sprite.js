@@ -1,6 +1,6 @@
 /*****
  *
- * jQuery spritesheet plugin
+ * jQuery spritesheet plugin v0.1
  * ©2013 Robbe Clerckx
  *
  * This software is provided as is without any warranties and so on...
@@ -12,7 +12,7 @@
  * That's about it for the legal crap.
  *
  *****/
- 
+
 (function($){
 	'use strict';
 
