@@ -8,15 +8,19 @@
     <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
 
-    <title>Jquery sprites by robbeman</title>
+    <script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="js/jquery.sprites.min.js"></script>
+    <script type="text/javascript" src="js/demo.js"></script>
+
+    <title>Jquery sprites by Robbe Clerckx</title>
   </head>
 
   <body>
 
     <header>
       <div class="container">
-        <h1>Jquery sprites</h1>
-        <h2>jQuery spritesheet animation</h2>
+        <h1>jQuery sprites</h1>
+        <h2>Kick-ass ugly demo page!</h2>
 
         <section id="downloads">
           <a href="https://github.com/robbeman/jquery_sprites/zipball/master" class="btn">Download as .zip</a>
@@ -28,14 +32,18 @@
 
     <div class="container">
       <section id="main_content">
-        <h1>jQuery spritesheet plugin</h1>
-
-<p>By Robbe Clerckx</p>
-
-<p>Testing this f-ing page generator since the shell won't cooperate...</p>
+        <p class="instructions">Click to toggle play/pause</p>
+        <div id="sprite1" class="sprite">&nbsp;</div>
+        <p class="instructions">Control this one by left and right arrow keys</p>
+        <div id="sprite2" class="sprite">&nbsp;</div>
+        <p class="instructions clearer">Click inside this region for an animation</p>
+        <div id="sprite3_container">
+          <div id="sprite3" class="sprite">&nbsp;</div>
+        </div>
       </section>
     </div>
 
+    <p class="thanks">PS: Thank you github!</p>
     
   </body>
 </html>
