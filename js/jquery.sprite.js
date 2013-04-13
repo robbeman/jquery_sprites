@@ -1,3 +1,18 @@
+/*****
+ *
+ * jQuery spritesheet plugin
+ * ©2013 Robbe Clerckx
+ *
+ * This software is provided as is without any warranties and so on...
+ * Feel free to use for both personal and commercial work.
+ * Please do not redistribute or sell in it's current state, you may provide a link to this git repository.
+ * Any modifications are allowed, credits are always welcome.
+ * (if you would modify just naming and redistribute under your own name, I would be very dissapointed in you, but I probably could not do much about it... so silly)
+ *
+ * That's about it for the legal crap.
+ *
+ *****/
+ 
 (function($){
 	'use strict';
 
@@ -48,6 +63,7 @@
  * Public methods, only accesible through the $.fn.sprite function
  */
 	var methods = {
+		// init function, obviously
 		init:function(options){
 			//initialise the sprite
 			var width = this.width(),
@@ -81,6 +97,7 @@
 			data.frameRate = settings.frameRate;
 			this.data('sprite',data);
 		},
+		// go to a certain frame in the spritesheet
 		goto:function(f){
 			var data = this.data('sprite');
 			var frames = data.frames;
@@ -103,6 +120,8 @@
 				}
 			}
 		},
+		// go to the previous frame
+		// @param wrap boolean go to last frame when trying to prev the first
 		prev:function(wrap){
 			var data = this.data('sprite');
 			var target = data.current-1;
@@ -111,6 +130,8 @@
 			}
 			methods.goto.call(this,target);
 		},
+		// go to the next frame
+		// @param wrap boolean go to the first frame when trying to next the last
 		next:function(wrap){
 			var data = this.data('sprite');
 			var target = data.current+1;
@@ -119,6 +140,7 @@
 			}
 			methods.goto.call(this,target);
 		},
+		// toggle playing animation
 		toggle:function(){
 			var data = this.data('sprite');
 			if (data.timeout){
@@ -128,6 +150,7 @@
 				methods.play.call(this);
 			}
 		},
+		// play the animation in a loop, this function runs independantly from the jquery animate plugin
 		play:function(){
 			var data = this.data('sprite');
 			//calculate the frame duration
@@ -142,14 +165,13 @@
 				methods.play.call(t)
 			},dur);
 		},
+		// pause the playing animation
 		pause:function(){
 			var data = this.data('sprite');
 			clearTimeout(data.timeout);
 			delete data.timeout;
 		}
 	};
-
-
 	
 
 })($);
