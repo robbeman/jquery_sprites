@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="author" content="Robbe Clerckx" />
+	<title>jQuery spritesheet animation</title>
+	
+	<style>
+	/*simple style reset*/
+	*{
+		margin:0px;
+		padding:0px;
+	}
+	html,body{
+		width:100%;
+		height:100%;
+	}
+	body{
+		color:white;
+		background-color:black;
+		font-family:Helvetica,Arial,sans-serif;
+	}
+
+
+	.sprite{
+		background:url(images/sparksy.png) top left no-repeat;
+		width:128px;
+		height:128px;
+
+		/*pointer-events:none;*/
+	}
+	#sprite1,#sprite2{
+		border:1px solid white;
+	}
+	#sprite3{
+		position:absolute;
+		/*easy way to prevent it from capturing clicks*/
+		/*additionally it will not overlap the border of the container, nice!*/
+		z-index:-1;
+	}
+	#sprite3_container{
+		position:relative;
+		border:1px solid white;
+		width:512px;
+		height:512px;
+		overflow:visible;
+
+		/*just to prevent a selection from showing up when rapidly clicking*/
+		-webkit-user-select: none;  /* Chrome all / Safari all */
+		-moz-user-select: none;     /* Firefox all */
+		-ms-user-select: none;      /* IE 10+ */
+
+		/* No support for these yet, use at own risk */
+		-o-user-select: none;
+		user-select: none; 
+	}
+
+	</style>
+	<link rel="shortcut icon" type="image/png" href="favicon.ico" />
+
+	<script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
+	<script type="text/javascript" src="js/jquery.sprite.js"></script>
+	<script type="text/javascript">
+
+	$(function(){
+
+		$('.sprite').sprite({
+			sheetWidth:1024,
+			sheetHeight:256,
+			frames:10
+		})
+		//.animate({frame:9})
+		//.sprite('goto',3)
+
+		$('#sprite1').on('click',togglePlaying);
+		$('body').on('keyup',keyUp);
+		$('#sprite3_container').on('click',playAndPosition);
+	});
+
+	function togglePlaying(e){
+		$('#sprite1').sprite('toggle');
+	}
+	function keyUp(e){
+		switch (e.keyCode){
+			case 37:
+				$('#sprite2').sprite('prev',true);
+				break;
+			case 39:
+				$('#sprite2').sprite('next',true);
+				break;
+		}
+	}
+	function playAndPosition(e){
+		var x = e.offsetX;
+		var y = e.offsetY;
+		var sprite = $('#sprite3');
+		x-=sprite.width()/2;
+		y-=sprite.height()/2;
+		console.log(e)
+
+		var rotation = (Math.random()*4 << 0)*90;
+		sprite.css({'left':x,'top':y,'transform':'rotate('+rotation+'deg)'}).stop().sprite('goto',0).animate({'frame':9});
+	}
+
+	</script>
+</head>
+
+<body>
+
+<div id="sprite1" class="sprite">&nbsp;</div>
+<p class="instructions">Click to toggle play/pause</p>
+<div id="sprite2" class="sprite">&nbsp;</div>
+<p class="instructions">Control this one by left and right arrow keys</p>
+<div id="sprite3_container">
+	<div id="sprite3" class="sprite">&nbsp;</div>
+</div>
+<p class="instructions">Click inside this region for an animation</div>
+
+</body>
+</html>
