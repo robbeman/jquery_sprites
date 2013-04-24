@@ -96,10 +96,9 @@
 		var sprite = $('#sprite3');
 		x-=sprite.width()/2;
 		y-=sprite.height()/2;
-		console.log(e)
 
 		var rotation = (Math.random()*4 << 0)*90;
-		sprite.css({'left':x,'top':y,'transform':'rotate('+rotation+'deg)'}).stop().sprite('goto',0).animate({'frame':9});
+		sprite.css({'left':x,'top':y,'transform':'rotate('+rotation+'deg)'}).stop().sprite('frame',0).animate({'frame':9});
 	}
 
 	</script>

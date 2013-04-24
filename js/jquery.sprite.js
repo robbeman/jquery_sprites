@@ -1,13 +1,9 @@
 /*****
  *
  * jQuery spritesheet plugin v0.1
- * ©2013 Robbe Clerckx
- *
- * This software is provided as is without any warranties and so on...
- * Feel free to use for both personal and commercial work.
- * Please do not redistribute or sell in it's current state, you may provide a link to this git repository.
- * Any modifications are allowed, credits are always welcome.
- * (if you would modify just naming and redistribute under your own name, I would be very dissapointed in you, but I probably could not do much about it... so silly)
+ * Copyright (C) 2013 Robbe Clerckx
+ * GNU Public license
+ * https://github.com/robbeman/jquery_sprites#legal-crap
  *
  * That's about it for the legal crap.
  *
@@ -27,7 +23,7 @@
 
 		if(t.length <= 0) return t;
 
-		if (typeof options === 'string'){
+		if (methods[options]){
 			//execute the needed function
 			var method = methods[options];
 			if(typeof method === 'function'){
@@ -36,13 +32,18 @@
 				}
 				else{
 					var args = Array.prototype.slice.call(arguments,1);
+					var r;
 					t.each(function(){
-						method.apply($(this),args);
+						r = method.apply($(this),args);
+						// return false if there is a return value
+						if (r != null) return false;
 					});
+					// return the actual value
+					if (r!=null)return r;
 				}
 			}
 		}
-		else{
+		else if (typeof options === 'object'){
 			t.each(function(){
 				methods.init.call($(this),options);
 			});
@@ -56,7 +57,7 @@
  * Extend the frame step
  */
 	$.fx.step.frame = function(fx){
-		methods.goto.call($(fx.elem),fx.now);
+		methods.frame.call($(fx.elem),fx.now);
 	}
 	
 /**
@@ -94,30 +95,37 @@
 			var data = {};
 			data.frames = frames;
 			data.current = 0;
+			data.totalFrames = frames.length;
 			data.frameRate = settings.frameRate;
 			this.data('sprite',data);
 		},
 		// go to a certain frame in the spritesheet
-		goto:function(f){
+		frame:function(f){
 			var data = this.data('sprite');
-			var frames = data.frames;
-			if (frames){
-				if (f < 0){
-					f = 0;
-				}
-				else if (f >= frames.length){
-					f = frames.length-1;
-				}
-				else{
-					//round it
-					f = f+.5<<0;
-				}
+			if (typeof f === 'number')
+			{
+				var frames = data.frames;
+				if (frames){
+					if (f < 0){
+						f = 0;
+					}
+					else if (f >= data.totalFrames){
+						f = data.totalFrames-1;
+					}
+					else{
+						//round it
+						f = (f+.5)<<0;
+					}
 
-				var frame = frames[f];
-				if (frame){ // 0 evaluates to false, so strict check
-					this.css('background-position',-frame[0]+'px '+-frame[1]+'px');
-					data.current = f;
+					var frame = frames[f];
+					if (frame){ // 0 evaluates to false, so strict check
+						this.css('background-position',-frame[0]+'px '+-frame[1]+'px');
+						data.current = f;
+					}
 				}
+			}
+			else{
+				return data.current;
 			}
 		},
 		// go to the previous frame
@@ -126,9 +134,9 @@
 			var data = this.data('sprite');
 			var target = data.current-1;
 			if(wrap) {
-				if (target < 0) target = data.frames.length-1;
+				if (target < 0) target = data.totalFrames-1;
 			}
-			methods.goto.call(this,target);
+			methods.frame.call(this,target);
 		},
 		// go to the next frame
 		// @param wrap boolean go to the first frame when trying to next the last
@@ -136,9 +144,9 @@
 			var data = this.data('sprite');
 			var target = data.current+1;
 			if (wrap) {
-				if (target >= data.frames.length) target = 0;
+				if (target >= data.totalFrames) target = 0;
 			}
-			methods.goto.call(this,target);
+			methods.frame.call(this,target);
 		},
 		// toggle playing animation
 		toggle:function(){

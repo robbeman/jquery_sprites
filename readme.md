@@ -13,10 +13,13 @@ Available options:
 * sheetHeight: not really used for now, but added for the sake of completeness
 * framerate: used when playing the animation in a loop. Used in the form of FPS, so if you provide 25 the frame will be updated every 40ms
 
+### $('.sprite').animate({'frame':5});
+After calling the init function you can animate your spritesheet using the jQuery animate function. This will evenly spread the frames over the duration of the animation.
+
 ### $('.sprite').sprite('methodname',arguments...);
 Execute a method, the arguments are optional (for most methods)
-* goto: step to a certain frame in the animation
-    * @param1 integer required, representing the frames index, starting by zero
+* frame: step to a certain frame in the animation, if no frame number is given, it will return the current frame of the first element in the matched set
+    * @param1 int, representing the frames index, starting by zero
 * prev: step to the previous frame in the animation
     * @param1 boolean optional, wrap the animation when the first frame is reached
 * next: step to the next frame in the animation
@@ -27,17 +30,26 @@ Execute a method, the arguments are optional (for most methods)
 * pause: pause the running animation, stops at the current frame
 
 ## Additional info
-This plugin requires jQuery and is only tested on jQuery 1.9.1, for now, but will probably work on earlier versions
+This plugin requires jQuery and is only tested on jQuery 1.9 - for now - but will probably work on earlier versions
 
 This is the first public release of the code, it might contain bugs, flaws or some other unintended things. Feedback is welcome.
 
 Testing this plugin with other versions of jQuery might be usefull, once tested, I will note it here (maybe even with a special thank you note).
 
 ## Legal crap
-* This software is provided as is without any warranties and so on...
-* Feel free to use for both personal and commercial work.
-* Please do not redistribute or sell in it's current state, you may provide a link to this git repository.
-* Any modifications are allowed, credits are always welcome.
-* (if you would modify just naming and redistribute under your own name, I would be very dissapointed in you, but I probably could not do much about it... so silly)
+Copyright (C) 2013 Robbe Clerckx
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 This code makes use of jQuery, for more info: http://jquery.com/

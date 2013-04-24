@@ -1,0 +1,36 @@
+{
+  "name": "Sprites",
+  "title": "jQuery sprites",
+  "description": "This plugin helps you animating spritesheets",
+  "keywords": [
+    "sprite",
+    "spritesheet",
+    "animation",
+    "sprites"
+  ],
+  "version": "1.0",
+  "author": {
+    "name": "Robbe Clerckx",
+    "url": "http://robbeclerckx.com"
+  },
+  "maintainers": [
+    {
+      "name": "Robbe Clerckx",
+      "email": "robbeclerckx@gmail.com",
+      "url": "http://robbeclerckx.com"
+    }
+  ],
+  "licenses": [
+    {
+      "type": "GPL",
+      "url": "https://github.com/robbeman/jquery_sprites#legal-crap"
+    }
+  ],
+  "bugs": "https://github.com/robbeman/jquery_sprites/issues",
+  "homepage": "http://robbeman.github.io/jquery_sprites",
+  "docs": "https://github.com/robbeman/jquery_sprites#documentation",
+  "download": "https://github.com/robbeman/jquery_sprites",
+  "dependencies": {
+    "jquery": ">=1.9"
+  }
+}
