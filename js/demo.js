@@ -34,5 +34,5 @@ function playAndPosition(e){
 	y-=sprite.height()/2;
 
 	var rotation = (Math.random()*4 << 0)*90;
-	sprite.css({'left':x,'top':y,'transform':'rotate('+rotation+'deg)'}).stop().sprite('goto',0).animate({'frame':9});
+	sprite.css({'left':x,'top':y,'transform':'rotate('+rotation+'deg)'}).stop().sprite('frame',0).animate({'frame':9});
 }
