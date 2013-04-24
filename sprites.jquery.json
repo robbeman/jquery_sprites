@@ -1,5 +1,5 @@
 {
-  "name": "Sprites",
+  "name": "sprites",
   "title": "jQuery sprites",
   "description": "This plugin helps you animating spritesheets",
   "keywords": [
@@ -8,7 +8,7 @@
     "animation",
     "sprites"
   ],
-  "version": "1.0",
+  "version": "0.1.1",
   "author": {
     "name": "Robbe Clerckx",
     "url": "http://robbeclerckx.com"
