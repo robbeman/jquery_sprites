@@ -8,7 +8,7 @@
     "animation",
     "sprites"
   ],
-  "version": "0.1.1",
+  "version": "0.1.2",
   "author": {
     "name": "Robbe Clerckx",
     "url": "http://robbeclerckx.com"
@@ -29,7 +29,7 @@
   "bugs": "https://github.com/robbeman/jquery_sprites/issues",
   "homepage": "http://robbeman.github.io/jquery_sprites",
   "docs": "https://github.com/robbeman/jquery_sprites#documentation",
-  "download": "https://github.com/robbeman/jquery_sprites",
+  "download": "https://github.com/robbeman/jquery_sprites/zipball/master",
   "dependencies": {
     "jquery": ">=1.9"
   }

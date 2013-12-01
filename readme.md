@@ -1,6 +1,9 @@
 # jQuery spritesheet plugin
 By Robbe Clerckx
 
+## Demo
+http://robbeman.github.io/jquery_sprites/
+
 ## Documentation
 ### $('.sprite').sprite({options});
 Init function, this will initialize the spritesheet by calculating the frame positions and adding them to the object data.
@@ -11,7 +14,9 @@ Available options:
     * an array of frame coordinates starting from the top left of the image in the form of a 2D array, example: [[0,0],[0,10],[0,20]]
 * sheetWidth: the width of the spritesheet image, only used for frame calculation (no need for adding it when you provide a frames array)
 * sheetHeight: not really used for now, but added for the sake of completeness
-* framerate: used when playing the animation in a loop. Used in the form of FPS, so if you provide 25 the frame will be updated every 40ms
+* frameRate: used when playing the animation in a loop. Used in the form of FPS, so if you provide 25 the frame will be updated every 40ms
+	* to prevent errors in camelcasing, allowing both frameRate and framerate (if you provide both, the first will be used)
+	* defaults to 33
 
 ### $('.sprite').animate({'frame':5});
 After calling the init function you can animate your spritesheet using the jQuery animate function. This will evenly spread the frames over the duration of the animation.
@@ -32,7 +37,7 @@ Execute a method, the arguments are optional (for most methods)
 ## Additional info
 This plugin requires jQuery and is only tested on jQuery 1.9 - for now - but will probably work on earlier versions
 
-This is the first public release of the code, it might contain bugs, flaws or some other unintended things. Feedback is welcome.
+This is just an experimental little project, it might contain bugs, flaws or some other unintended things. Feedback is welcome.
 
 Testing this plugin with other versions of jQuery might be usefull, once tested, I will note it here (maybe even with a special thank you note).
 

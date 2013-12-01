@@ -12,6 +12,23 @@
 (function($){
 	'use strict';
 
+// First, check to see if cssHooks are supported
+if ( $.cssHooks ) {
+	// Wrap in a document ready call, because jQuery writes
+	// cssHooks at this time and will blow away your functions
+	// if they exist.
+	$(function () {
+		$.cssHooks[ "frame" ] = {
+				get: function( elem, computed, extra ) {
+					return methods.frame.call($(elem));
+			},
+				set: function( elem, value ) {
+					return methods.frame.call($(elem),value);
+			}
+		};
+	});
+}
+ 
 /**
  * Extend jQuery with an init function
  * @param options the options for initializing or the name of the method to run
@@ -73,10 +90,12 @@
 				settings = $.extend({
 					frames: 1,
 					sheetWidth:width,
-					sheetHeight:height,
-					frameRate:33
+					sheetHeight:height
+					//frameRate:33 // commented out to allow missspelling
 				},options
 			);
+			// allow wrong casing in framerate var, I sometimes miss myself, so making it convenient for others :)
+			settings.frameRate = settings.frameRate || settings.framerate || 33;
 
 			if (typeof settings.frames === "number"){
 				//calculate the frames by the width and height of the spritesheet
@@ -106,16 +125,27 @@
 			{
 				var frames = data.frames;
 				if (frames){
-					if (f < 0){
-						f = 0;
+					// allow frame to be looped outside the actual animation
+					// handy for jquery animate
+					while(f < 0){
+						f+=data.totalFrames;
 					}
-					else if (f >= data.totalFrames){
-						f = data.totalFrames-1;
+					while(f >= data.totalFrames){
+						f-=data.totalFrames;
 					}
-					else{
-						//round it
-						f = (f+.5)<<0;
-					}
+					f = (f+.5)<<0;
+
+					// old version, just capping the max values
+					// if (f < 0){
+					// 	f = 0;
+					// }
+					// else if (f >= data.totalFrames){
+					// 	f = data.totalFrames-1;
+					// }
+					// else{
+					// 	//round it
+					// 	f = (f+.5)<<0;
+					// }
 
 					var frame = frames[f];
 					if (frame){ // 0 evaluates to false, so strict check
@@ -182,4 +212,4 @@
 	};
 	
 
-})($);
+})(jQuery);
